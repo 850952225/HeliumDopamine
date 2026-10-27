@@ -1,0 +1,9 @@
+Package: com.example.heliumdopamine
+Name: HeliumDopamine
+Version: 0.1.0
+Architecture: iphoneos-arm
+Description: Rootless SpringBoard HUD prototype inspired by Helium feature set.
+Maintainer: Local Builder
+Author: Local Builder
+Section: Tweaks
+Depends: mobilesubstrate
