@@ -1,0 +1,49 @@
+name: Build HeliumDopamine
+
+on:
+workflow_dispatch:
+push:
+branches:
+- main
+
+jobs:
+build:
+runs-on: macos-14
+
+steps:
+  - name: Checkout source
+    uses: actions/checkout@v4
+  - name: Install Theos
+    run: |
+      git clone --recursive https://github.com/theos/theos.git "$HOME/theos"
+      echo "THEOS=$HOME/theos" >> "$GITHUB_ENV"
+  - name: Build Debian package
+    run: |
+      export THEOS="$HOME/theos"
+      make package
+  - name: Upload Debian package
+    uses: actions/upload-artifact@v4
+    with:
+      name: HeliumDopamine-deb
+      path: packages/*.deb
+      if-no-files-found: error
+steps:
+  - name: Checkout source
+    uses: actions/checkout@v4
+
+  - name: Install Theos
+    run: |
+      git clone --recursive https://github.com/theos/theos.git "$HOME/theos"
+      echo "THEOS=$HOME/theos" >> "$GITHUB_ENV"
+
+  - name: Build Debian package
+    run: |
+      export THEOS="$HOME/theos"
+      make package
+
+  - name: Upload Debian package
+    uses: actions/upload-artifact@v4
+    with:
+      name: HeliumDopamine-deb
+      path: packages/*.deb
+      if-no-files-found: error
